@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "specify application server"
+  exit 1
+fi
+
+WRK="wrk -t 10 -c 100 -d 30s"
+mkdir -p tmp/result/$1
+
+echo "plaintext"
+$WRK http://localhost:3000/hello_world/plaintext >& tmp/result/$1/plaintext.txt
+
+echo "json"
+$WRK http://localhost:3000/hello_world/json >& tmp/result/$1/json.txt
+
+echo "db"
+$WRK http://localhost:3000/hello_world/db >& tmp/result/$1/db.txt
