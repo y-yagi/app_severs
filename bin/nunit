@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# sudo unitd --control 127.0.0.1:8080
+# curl -X DELETE http://127.0.0.1:8080/config
+curl -X PUT --data-binary '{ "listeners": { "*:3000": { "pass": "applications/ruby_app" } }, "applications": { "ruby_app": { "type": "ruby", "working_directory": "/home/yaginuma/program/rails/app_severs", "script": "config.ru", "environment": { "RAILS_ENV": "production" } } } }' http://127.0.0.1:8080/config
